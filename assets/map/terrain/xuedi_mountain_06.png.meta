@@ -1,0 +1,34 @@
+{
+  "ver": "2.3.3",
+  "uuid": "063fa486-a010-4caa-aaca-15d88788ddf6",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
+  "subMetas": {
+    "xuedi_mountain_06": {
+      "ver": "1.0.4",
+      "uuid": "9b79fcee-29f1-4df1-937b-1c8c18793860",
+      "rawTextureUuid": "063fa486-a010-4caa-aaca-15d88788ddf6",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 1000,
+      "height": 715,
+      "rawWidth": 1000,
+      "rawHeight": 715,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

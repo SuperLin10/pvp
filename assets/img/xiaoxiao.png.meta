@@ -1,12 +1,16 @@
 {
-  "ver": "1.0.0",
+  "ver": "2.3.3",
   "uuid": "72c49ed0-2447-4bd4-9ad9-44b71a92f3da",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
   "subMetas": {
     "xiaoxiao": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "327ae809-54ff-4e9a-934e-e816a2233bba",
       "rawTextureUuid": "72c49ed0-2447-4bd4-9ad9-44b71a92f3da",
       "trimType": "auto",

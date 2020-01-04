@@ -2,99 +2,96 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        map:{
-            default:null,
-            type:cc.Node,
+        map: {
+            default: null,
+            type: cc.Node,
         },
         itemlist: {
-            default:null,
+            default: null,
             type: cc.Node,
         },
         socket: {
-            default:null,
+            default: null,
             type: cc.Node,
         },
-        uid:0,
-        maptype:"equip",
-        hp:0,
-        attr:0,
-        def:0,
-        min:0,
-        str:0,
-        xixue:0,
-        baoji:0,
-        shanbi:0,
-        yisu:0,
-        gongsu:0,
-        desc:"",
-        heroname:"",
-        lv:1
+        uid: 0,
+        maptype: "equip",
+        hp: 0,
+        attr: 0,
+        def: 0,
+        min: 0,
+        str: 0,
+        xixue: 0,
+        baoji: 0,
+        shanbi: 0,
+        yisu: 0,
+        gongsu: 0,
+        desc: "",
+        heroname: "",
+        lv: 1
 
 
-        
+
 
 
     },
 
 
 
-    setdesc: function (itemdesc) {
+    setdesc: function(itemdesc) {
         var name = itemdesc.getChildByName("namelabel")
         var shuxing = itemdesc.getChildByName("shuxing")
         var desc = itemdesc.getChildByName("desc")
         name.getComponent("cc.Label").string = this.heroname + "(" + this.lv + ")"
-        desc.getComponent("cc.Label").string = this.desc+" "
+        desc.getComponent("cc.Label").string = this.desc + " "
         var str = ""
 
 
-        this.hp !== 0 ?str=str+"增加" +this.hp+"点生命\n":str=str
-        this.attr !== 0 ?str=str+"增加" +this.attr+"攻击\n":str=str
-        this.def !== 0 ?str=str+"增加" +this.def+"护甲\n":str=str
-        this.min !== 0 ?str=str+"增加" +this.min+"敏捷\n":str=str
-        this.str !== 0 ?str=str+"增加" +this.str+"力量\n":str=str
-        this.xixue !== 0 ?str=str+"增加" +this.xixue+"吸血\n":str=str
-        this.baoji !== 0 ?str=str+"增加" +this.baoji+"暴击\n":str=str
-        this.shanbi !== 0 ?str=str+"增加" +this.shanbi+"闪避\n":str=str
-        this.yisu !== 0 ?str=str+"增加" +this.yisu+"移动速度\n":str=str
-        this.gongsu !== 0 ?str=str+"增加" +this.gongsu+"攻击速度\n":str=str
+        this.hp !== 0 ? str = str + "增加" + this.hp + "点生命\n" : str = str
+        this.attr !== 0 ? str = str + "增加" + this.attr + "攻击\n" : str = str
+        this.def !== 0 ? str = str + "增加" + this.def + "护甲\n" : str = str
+        this.min !== 0 ? str = str + "增加" + this.min + "敏捷\n" : str = str
+        this.str !== 0 ? str = str + "增加" + this.str + "力量\n" : str = str
+        this.xixue !== 0 ? str = str + "增加" + this.xixue + "吸血\n" : str = str
+        this.baoji !== 0 ? str = str + "增加" + this.baoji + "暴击\n" : str = str
+        this.shanbi !== 0 ? str = str + "增加" + this.shanbi + "闪避\n" : str = str
+        this.yisu !== 0 ? str = str + "增加" + this.yisu + "移动速度\n" : str = str
+        this.gongsu !== 0 ? str = str + "增加" + this.gongsu + "攻击速度\n" : str = str
         shuxing.getComponent("cc.Label").string = str
-        desc.y = shuxing.y - shuxing.height 
-        
-        
+        desc.y = shuxing.y - shuxing.height
+
+
     },
 
     // use this for initialization
-    onLoad: function () {
+    onLoad: function() {
         let self = this
         self.swallowTouches = true
         this.equipname = ""
         this.map = cc.find("map4")
         this.socket = this.map.getChildByName("web")
 
-        
-        this.node.on('mouseup', function(event){
-            if(event.getButton() != cc.Event.EventMouse.BUTTON_RIGHT) return
-            if(this.down == false) return
+
+        this.node.on('mouseup', function(event) {
+            if (event.getButton() != cc.Event.EventMouse.BUTTON_RIGHT) return
+            if (this.down == false) return
             this.down = false
             this.parent = null
             var node = self.getequiphold(event.getLocation().x, event.getLocation().y)
-            if(node == null)
-            {
+            if (node == null) {
                 console.log("add to map")
                 var map = cc.find("map4")
                 this.parent = map.getChildByName("itemlist")
                 this.x = event.getLocation().x - map.x
                 this.y = event.getLocation().y - map.y
-                this.runAction(cc.scaleTo(0.1, 0.5,0.5))
-                this.maptype = "item" 
-            }
-            else
-            {
-                 console.log("add to equip")
+                this.runAction(cc.scaleTo(0.1, 0.5, 0.5))
+                this.maptype = "item"
+            } else {
+                console.log("add to equip")
                 this.parent = node
                 this.x = 0
                 this.y = 0
-                this.runAction(cc.scaleTo(0.1, 1,1))
+                this.runAction(cc.scaleTo(0.1, 1, 1))
                 this.maptype = "equip"
             }
 
@@ -104,51 +101,45 @@ cc.Class({
             node.getComponent("global").addequip(self.uid)
         })
 
-        this.node.on('mouseleave', function(event){
-            if(this.down == true) 
-            {
-            this.down = false
-            this.parent = null
-            var node = self.getequiphold(event.getLocation().x, event.getLocation().y)
-            
-            if(node == null)
-            {
-                console.log("add to map")
-                var map = cc.find("map4")
-                this.parent = map.getChildByName("itemlist")
-                this.x = event.getLocation().x - map.x
-                this.y = event.getLocation().y - map.y
-                this.runAction(cc.scaleTo(0.1, 0.5,0.5))
-                this.maptype = "item" 
-            }
-            else
-            {
-                this.parent = node
-                this.x = 0
-                this.y = 0
-                this.runAction(cc.scaleTo(0.1, 1,1))
-                this.maptype = "equip"
-            }
+        this.node.on('mouseleave', function(event) {
+            if (this.down == true) {
+                this.down = false
+                this.parent = null
+                var node = self.getequiphold(event.getLocation().x, event.getLocation().y)
 
-        }
-        else
-        {
+                if (node == null) {
+                    console.log("add to map")
+                    var map = cc.find("map4")
+                    this.parent = map.getChildByName("itemlist")
+                    this.x = event.getLocation().x - map.x
+                    this.y = event.getLocation().y - map.y
+                    this.runAction(cc.scaleTo(0.1, 0.5, 0.5))
+                    this.maptype = "item"
+                } else {
+                    this.parent = node
+                    this.x = 0
+                    this.y = 0
+                    this.runAction(cc.scaleTo(0.1, 1, 1))
+                    this.maptype = "equip"
+                }
+
+            } else {
                 var itemdesc = cc.find("itemdesc")
 
                 itemdesc.active = false
-        }
+            }
         })
 
-        this.node.on('mousedown', function(event){
-            if(event.getButton() != cc.Event.EventMouse.BUTTON_RIGHT) return
+        this.node.on('mousedown', function(event) {
+            if (event.getButton() != cc.Event.EventMouse.BUTTON_RIGHT) return
             console.log("maptype is " + this.maptype)
             var equips = cc.find("equips")
             this.parent = null
             this.parent = equips
-            this.x = event.getLocation().x - equips.x 
-            this.y = event.getLocation().y - equips.y 
+            this.x = event.getLocation().x - equips.x
+            this.y = event.getLocation().y - equips.y
             this.down = true
-            this.runAction(cc.scaleTo(0.1, 0.8,0.8))
+            this.runAction(cc.scaleTo(0.1, 0.8, 0.8))
 
 
             // if (this.maptype == "item")
@@ -173,12 +164,11 @@ cc.Class({
 
         })
 
-        this.node.on('mousemove', function(event){
-            if (this.down == true)
-            {
-            var equips = cc.find("equips")
-            this.x = event.getLocation().x - equips.x 
-            this.y = event.getLocation().y - equips.y 
+        this.node.on('mousemove', function(event) {
+            if (this.down == true) {
+                var equips = cc.find("equips")
+                this.x = event.getLocation().x - equips.x
+                this.y = event.getLocation().y - equips.y
                 // if (this.maptype == "item")
                 // {
                 //     var map = cc.find("map4")
@@ -196,8 +186,7 @@ cc.Class({
                 // }
 
 
-            }
-            else{
+            } else {
                 var itemdesc = cc.find("itemdesc")
                 self.setdesc(itemdesc)
                 itemdesc.x = this.x + this.parent.x + this.parent.parent.x + 75
@@ -221,15 +210,14 @@ cc.Class({
 
 
 
-    setattr: function (uid) {
+    setattr: function(uid) {
         uid = parseInt(uid)
         var confmod = require("equipconf")
         var equipconf = confmod[uid]
         console.log(equipconf)
-        for (var prop in equipconf )
-        {
+        for (var prop in equipconf) {
             this[prop] = equipconf[prop]
-        } 
+        }
         // if (uid.indexOf("204") != -1)
         // {
         //    this.min = 16,
@@ -257,17 +245,14 @@ cc.Class({
         //     this.equipname = "疯脸"
         //     this.desc = "发起了疯了队友也杀"
         // }
-        
-        
+
+
     },
 
     // called every frame, uncomment this function to activate update callback
-    update: function (dt) {
-        if(this.equipname == "")
-        {
+    update: function(dt) {
+        if (this.equipname == "") {
             this.setattr(this.uid)
         }
-
-
     },
 });

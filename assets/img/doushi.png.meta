@@ -1,12 +1,16 @@
 {
-  "ver": "1.0.0",
+  "ver": "2.3.3",
   "uuid": "3b99076d-b51c-4222-b52f-5199d61134d9",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
   "subMetas": {
     "doushi": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "2cb88167-5d9e-4356-aae6-04d384aa5d52",
       "rawTextureUuid": "3b99076d-b51c-4222-b52f-5199d61134d9",
       "trimType": "auto",
